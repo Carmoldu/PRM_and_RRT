@@ -65,6 +65,19 @@ for i = 2:nsamples
     % edge_lengths and nedges variables accordingly.
     %
     
+    [Sort_dist, indexs]=sort(distances);
+    n = length(distances);
+    
+    for i=1: min(k,n)
+        j=indexs(i);
+        
+        if(LocalPlanner(x,samples(:,j)))
+            nedges=nedges+1;
+            edges(nedges,:)=[n+1,j];
+            edge_lengths(nedges)=Sort_dist(i);
+        end
+    end
+    
     fprintf (1, 'nsamples = %d, nedges = %d\n', i, nedges);
    
 end
